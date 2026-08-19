@@ -19,6 +19,7 @@ SECRET_PATTERNS = {
     "private key": re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
     "GitHub token": re.compile(r"\b(?:ghp|gho|ghu|ghs|github_pat)_[A-Za-z0-9_]{20,}\b"),
     "OpenAI-style token": re.compile(r"\bsk-[A-Za-z0-9_-]{20,}\b"),
+    "Context7 token": re.compile(r"\bctx7sk-[A-Za-z0-9_-]{20,}\b"),
     "AWS access key": re.compile(r"\bAKIA[A-Z0-9]{16}\b"),
 }
 
@@ -168,8 +169,34 @@ def validate_mcp(errors: list[str]) -> None:
         if not isinstance(servers, dict):
             error(errors, config_path, "mcp must be a JSON object")
             continue
-        if server_dir.name not in servers:
+        matching_servers = [
+            server
+            for name, server in servers.items()
+            if name.replace("_", "-") == server_dir.name
+        ]
+        if not matching_servers:
             error(errors, config_path, "mcp must contain a server matching its directory name")
+            continue
+
+        for server in matching_servers:
+            if not isinstance(server, dict):
+                error(errors, config_path, "matching mcp server must be a JSON object")
+                continue
+            server_type = server.get("type")
+            if server_type not in {"local", "remote"}:
+                error(errors, config_path, "matching mcp server type must be local or remote")
+            if "enabled" in server and not isinstance(server["enabled"], bool):
+                error(errors, config_path, "matching mcp server enabled must be a boolean")
+            if server_type == "remote" and not isinstance(server.get("url"), str):
+                error(errors, config_path, "remote mcp server must have a string url")
+            if server_type == "local":
+                command = server.get("command")
+                if not (
+                    isinstance(command, list)
+                    and command
+                    and all(isinstance(part, str) for part in command)
+                ):
+                    error(errors, config_path, "local mcp server must have a string command array")
 
 
 def validate_markdown_asset_names(errors: list[str]) -> None:
