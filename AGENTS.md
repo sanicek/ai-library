@@ -20,6 +20,8 @@ copies.
 - Preserve the native format expected by the target runtime.
 - Add a new top-level asset category only when adding a real asset of that kind,
   and document its conventions in `README.md` and `CONTRIBUTING.md`.
+- Keep `README.md` focused on repository-wide usage and conventions. Do not
+  enumerate individual assets; the filesystem is the catalog.
 - Prefer improving an asset in place over creating a nearly identical variant.
   Create a variant when its behavior or target runtime materially differs.
 
