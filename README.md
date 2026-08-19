@@ -22,26 +22,6 @@ deliberate changes.
 
 Directories may be absent until the library contains an asset of that kind.
 
-## Catalog
-
-### Agents
-
-| Asset | Purpose |
-| --- | --- |
-| [`security-oracle`](agents/security-oracle.md) | Independent security, correctness, and architecture review |
-
-The security oracle preserves its opinionated OpenAI model selection and grants
-unrestricted Bash access for investigation. Its `edit: deny` setting does not
-prevent shell commands from changing files. Review and restrict its permissions
-before copying it into a workspace with different trust requirements.
-
-### MCP Servers
-
-| Asset | Purpose |
-| --- | --- |
-| [`context7`](mcp/context7/) | Current library and framework documentation |
-| [`gh-grep`](mcp/gh-grep/) | Literal code search across public GitHub repositories |
-
 ## Using Assets
 
 Copy assets manually. For example:
