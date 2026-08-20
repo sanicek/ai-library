@@ -2,42 +2,42 @@
 
 ## Purpose
 
-This repository is a curated library of reusable agentic assets. Consumers copy
-individual assets into another workspace and adapt them there. A copied asset is
-owned by its target repository; this library does not track or update vendored
-copies.
+This repository contains reusable agentic assets. Consumers copy and adapt
+individual assets; target repositories own their copies without synchronization.
 
 ## Working Rules
 
-- Keep assets standalone, readable, and easy to copy manually.
-- Keep prompt bodies runtime-neutral where practical.
-- Put runtime-specific assets in a directory named for that runtime.
+- Keep assets standalone, readable, manually copyable, and runtime-neutral where
+  practical. Put runtime-specific assets under that runtime's directory.
 - Do not add installers, management CLIs, lockfiles, generators, synchronization
-  metadata, Git hooks, or hosted CI configuration.
-- Do not introduce a dependency solely for repository validation.
+  metadata, Git hooks, hosted CI, or dependencies used only for validation.
 - Never commit credentials, tokens, private keys, or private project details.
-- Use lowercase hyphen-separated names for assets and directories.
-- Preserve the native format expected by the target runtime.
+- Use lowercase hyphen-separated names and preserve each runtime's native format.
 - Add a new top-level asset category only when adding a real asset of that kind,
-  and document its conventions in `README.md` and `CONTRIBUTING.md`.
-- Keep `README.md` focused on repository-wide usage and conventions. Do not
-  enumerate individual assets; the filesystem is the catalog.
-- Prefer improving an asset in place over creating a nearly identical variant.
-  Create a variant when its behavior or target runtime materially differs.
+  then document its conventions in `README.md` and `CONTRIBUTING.md`.
+- Keep `README.md` repository-wide; the filesystem is the asset catalog.
+- Improve assets in place. Add variants only for materially different behavior
+  or runtimes.
 
 ## Validation
 
-Run the local validator after changing assets or repository conventions:
+After changing assets or conventions, run:
 
 ```sh
 python3 scripts/validate.py
 ```
 
-Before making a user-requested commit:
+Before a user-requested commit, also inspect `git status --short` and the complete
+intended diff, then stage only intended files. Never commit without an explicit
+request. If validation cannot run, report why; do not claim success.
 
-1. Run `python3 scripts/validate.py`.
-2. Inspect `git status --short` and the complete intended diff.
-3. Stage only the intended files.
-4. Do not commit unless the user explicitly requested a commit.
+# Style
 
-If validation cannot run, state why rather than claiming the change is valid.
+Be terse and information-dense. Omit filler, restatement, routine narration,
+repeated context, and generic offers. Explain only useful non-obvious decisions,
+tradeoffs, uncertainty, failures, or architecture.
+
+Use targeted reads, avoid duplicated work, delegate suitable repetitive tasks,
+make the smallest coherent change, and verify the narrowest relevant scope first.
+Final responses normally state changes, caveats, and verification. Preserve exact
+technical text and omit anything irrelevant to correctness or clarity.
