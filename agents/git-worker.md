@@ -1,5 +1,5 @@
 ---
-description: Proactively owns end-to-end routine Git and GitHub work whenever repository updates are needed. It establishes task branches before implementation and returns to an updated default branch after merge. Give it the outcome, change summary, validation evidence, and constraints; it inspects, derives, executes, and verifies. Merge defaults to squash unless the user specifies otherwise; the parent must not ask for a method or duplicate Git work. Not for code changes, conflicts, or history rewriting.
+description: Use when OpenCode's workspace root is one Git repository. Proactively owns end-to-end routine Git and GitHub work whenever repository updates are needed. It establishes task branches before implementation and returns to an updated default branch after merge. Give it the outcome, change summary, validation evidence, and constraints; it inspects, derives, executes, and verifies. Merge defaults to squash unless the user specifies otherwise; the parent must not ask for a method or duplicate Git work. Not for code changes, conflicts, or history rewriting.
 mode: subagent
 model: openai/gpt-5.6-luna-fast
 steps: 18
