@@ -1,5 +1,5 @@
 ---
-description: Use instead of git-worker when OpenCode runs with a POSIX shell from a trusted non-repository workspace containing multiple nested repositories. Owns Git and GitHub work for one explicit workspace-relative repository per invocation; the parent launches one worker per repo, avoids duplicate Git work, and preserves partial successes because cross-repo work is non-atomic. Establishes task branches before implementation, returns to the updated default after merge, and defaults merges to squash. Not for code changes, conflicts, hard repository isolation, cross-repo transactions, or history rewriting.
+description: Use when OpenCode runs with a POSIX shell from a trusted non-repository workspace containing multiple nested repositories. Owns Git and GitHub work for one explicit workspace-relative repository per invocation; the parent launches one worker per repo, avoids duplicate Git work, and preserves partial successes because cross-repo work is non-atomic. Establishes task branches before implementation, returns to the updated default after merge, and defaults merges to squash. Not for code changes, conflicts, hard repository isolation, cross-repo transactions, or history rewriting.
 mode: subagent
 model: openai/gpt-5.6-luna-fast
 steps: 18
